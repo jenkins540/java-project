@@ -1,0 +1,114 @@
+{
+ "properties": {
+  "displayName": "MAFR naming convention for virtual networks & subnets",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "category": "Testing",
+   "createdBy": "3d43d36c-3795-459c-9c64-4d82f0ef476f",
+   "createdOn": "2020-03-23T08:46:33.2316867Z",
+   "updatedBy": "3d43d36c-3795-459c-9c64-4d82f0ef476f",
+   "updatedOn": "2020-04-02T15:02:36.763891Z"
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Policy Effect",
+     "description": "Enable or disable the execution of the policy"
+    },
+    "allowedValues": [
+     "Audit",
+     "Deny",
+     "Disabled"
+    ],
+    "defaultValue": "Deny"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Network/virtualNetworks"
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 5), substring(field('name'), 0, 5),'Not starting with vnet-')]",
+         "equals": "vnet-"
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 5), split(field('name'),'-')[1], 'string is not in env list')]",
+         "in": [
+          "prd",
+          "dev",
+          "uat",
+          "stg"
+         ]
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 5), split(field('name'),'-')[2], 'string is not 3 env char')]",
+         "in": [
+          "westeurope",
+          "northeurope",
+          "centralindia",
+          "centralindia",
+          "uksouth",
+          "uaenorth"
+         ]
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 5), substring(field('name'), sub(length(field('name')), 4), 4), 'string too short')]",
+         "match": "-###"
+        },
+        {
+         "allOf": [
+          {
+           "value": "[split(first(field('Microsoft.Network/virtualNetworks/subnets[*].name')),'_')[0]]",
+           "equals": "snet"
+          },
+          {
+           "value": "[split(first(field('Microsoft.Network/virtualNetworks/subnets[*].name')),'_')[1]]",
+           "in": [
+            "prd",
+            "dev",
+            "uat",
+            "stg"
+           ]
+          },
+          {
+           "value": "[split(first(field('Microsoft.Network/virtualNetworks/subnets[*].name')),'_')[2]]",
+           "in": [
+            "westeurope",
+            "northeurope",
+            "centralindia",
+            "centralindia",
+            "uksouth",
+            "uaenorth"
+           ]
+          },
+          {
+           "value": "[split(first(field('Microsoft.Network/virtualNetworks/subnets[*].name')),'_')[3]]",
+           "in": [
+            "fe",
+            "be"
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "[parameters('effect')]"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/MAFR-RnD/providers/Microsoft.Authorization/policyDefinitions/d52c74a5-52de-4616-b04c-72519bfa5255",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "d52c74a5-52de-4616-b04c-72519bfa5255"
+}

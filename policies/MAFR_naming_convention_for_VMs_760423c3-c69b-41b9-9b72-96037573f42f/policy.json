@@ -1,0 +1,90 @@
+{
+ "properties": {
+  "displayName": "MAFR naming convention for VMs",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "This policy is to keep naming standards of the VMs such as vm-<env>-<app>-<role>-<2dig>\nvm-p1-mag-fe-01\nvm-p1-mag-db-01",
+  "metadata": {
+   "category": "Compute",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-03-17T13:18:52.3968177Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2020-04-18T16:35:28.7439712Z"
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Compute/virtualMachines"
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), 0, 3),'Not starting with vm-')]",
+         "equals": "vm-"
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 2), split(field('name'),'-')[1], 'string is not p-d-u-s[1:2]')]",
+           "match": "p1"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 2), split(field('name'),'-')[1], 'string is not p-d-u-s[1:2]')]",
+           "match": "d1"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 2), split(field('name'),'-')[1], 'string is not p-d-u-s[1:2]')]",
+           "match": "u1"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 2), split(field('name'),'-')[1], 'string is not p-d-u-s[1:2]')]",
+           "match": "s1"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 2), split(field('name'),'-')[1], 'string is not p-d-u-s[1:2]')]",
+           "match": "p2"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 2), split(field('name'),'-')[1], 'string is not p-d-u-s[1:2]')]",
+           "match": "d2"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 2), split(field('name'),'-')[1], 'string is not p-d-u-s[1:2]')]",
+           "match": "u2"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 2), split(field('name'),'-')[1], 'string is not p-d-u-s[1:2]')]",
+           "match": "s2"
+          }
+         ]
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string should be app name')]",
+         "match": "???"
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'string fe,be,db,wb')]",
+         "match": "??"
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[4], 'two dig')]",
+         "match": "##"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "audit"
+   }
+  }
+ },
+ "id": "/subscriptions/9f867886-e1ea-4b2b-9891-03acde7ac807/providers/Microsoft.Authorization/policyDefinitions/760423c3-c69b-41b9-9b72-96037573f42f",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "760423c3-c69b-41b9-9b72-96037573f42f"
+}

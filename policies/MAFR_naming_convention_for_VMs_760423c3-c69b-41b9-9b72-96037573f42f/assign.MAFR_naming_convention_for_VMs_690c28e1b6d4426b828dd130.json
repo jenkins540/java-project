@@ -1,0 +1,26 @@
+{
+ "sku": {
+  "name": "A0",
+  "tier": "Free"
+ },
+ "properties": {
+  "displayName": "MAFR naming convention for VMs",
+  "policyDefinitionId": "/subscriptions/9f867886-e1ea-4b2b-9891-03acde7ac807/providers/Microsoft.Authorization/policyDefinitions/760423c3-c69b-41b9-9b72-96037573f42f",
+  "scope": "/subscriptions/9f867886-e1ea-4b2b-9891-03acde7ac807",
+  "notScopes": [],
+  "parameters": {},
+  "description": "",
+  "metadata": {
+   "assignedBy": "Mohamed Galal Badr",
+   "parameterScopes": {},
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-03-17T13:21:12.7013054Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2020-06-24T22:10:43.3909536Z"
+  },
+  "enforcementMode": "DoNotEnforce"
+ },
+ "id": "/subscriptions/9f867886-e1ea-4b2b-9891-03acde7ac807/providers/Microsoft.Authorization/policyAssignments/690c28e1b6d4426b828dd130",
+ "type": "Microsoft.Authorization/policyAssignments",
+ "name": "690c28e1b6d4426b828dd130"
+}

@@ -1,0 +1,84 @@
+{
+ "properties": {
+  "displayName": "MAFR naming convention for resource groups4",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "category": "Testing",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-08-26T11:27:14.6988607Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2020-08-26T11:29:41.9913876Z"
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 8), split(field('name'),'-')[2], 'string is not in location list')]",
+         "in": [
+          "un",
+          "uc",
+          "wi",
+          "ci",
+          "we"
+         ]
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 9), split(field('name'),'-')[3], 'string is not in env list')]",
+         "in": [
+          "p",
+          "s",
+          "t",
+          "d"
+         ]
+        },
+        {
+         "anyOf": [
+          {
+           "field": "name",
+           "match": "rg-....-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-.....-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-......-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-.......-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-........-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-.........-..-.-##"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/RnD-DEV/providers/Microsoft.Authorization/policyDefinitions/2735640f-b2cf-4935-a49b-c0333a6db921",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "2735640f-b2cf-4935-a49b-c0333a6db921"
+}

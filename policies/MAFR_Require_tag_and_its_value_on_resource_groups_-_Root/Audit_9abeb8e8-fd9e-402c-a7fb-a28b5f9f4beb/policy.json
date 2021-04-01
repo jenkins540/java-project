@@ -1,0 +1,98 @@
+{
+ "properties": {
+  "displayName": "MAFR Require tag and its value on resource groups - Root/Audit",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "Enforces a required tagging on the resource groups.",
+  "metadata": {
+   "category": "Tags",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-04-23T20:26:59.6909579Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "ApplicationName": {
+    "type": "String",
+    "metadata": {
+     "displayName": "ApplicationName",
+     "description": "Provides a charge code or cost center to attribute the bill for the resources too. Tag value: Cost Center. Example: team@domain.com"
+    }
+   },
+   "BusinessUnit": {
+    "type": "String",
+    "metadata": {
+     "displayName": "BusinessUnit",
+     "description": "Provides information on department or team is responsible for administering/supporting the application. Tag value: Team name/email. Example: 1506548"
+    }
+   },
+   "CostCenter": {
+    "type": "String",
+    "metadata": {
+     "displayName": "CostCenter",
+     "description": "Accounting cost center associated with this resource."
+    }
+   },
+   "Environment": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Environment",
+     "description": "Provides information on what the resource group is used for (useful for maintenance, policy enforcement, chargeback, etc.) Tag value: Dev, QA, Stage, Test, Prod. Example: Prod"
+    }
+   },
+   "Owner": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Owner",
+     "description": "The Business app owner to contact. Tag value: Business App owners’ email. Example: name@domain.com"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('ApplicationName'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('BusinessUnit'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('CostCenter'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Environment'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Owner'), ']')]",
+       "exists": "true"
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "audit"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/9abeb8e8-fd9e-402c-a7fb-a28b5f9f4beb",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "9abeb8e8-fd9e-402c-a7fb-a28b5f9f4beb"
+}

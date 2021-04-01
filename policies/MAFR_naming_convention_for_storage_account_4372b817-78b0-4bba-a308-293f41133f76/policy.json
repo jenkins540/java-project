@@ -1,0 +1,45 @@
+{
+ "properties": {
+  "displayName": "MAFR naming convention for storage account",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "category": "Testing",
+   "createdBy": "3d43d36c-3795-459c-9c64-4d82f0ef476f",
+   "createdOn": "2020-03-16T09:04:42.5406587Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2020-04-06T15:26:09.8883129Z"
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Storage/storageAccounts"
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "field": "name",
+         "like": "sa*"
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 2), substring(field('name'), sub(length(field('name')), 3), 3), 'string too short')]",
+         "match": "##"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/MAFR-RnD/providers/Microsoft.Authorization/policyDefinitions/4372b817-78b0-4bba-a308-293f41133f76",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "4372b817-78b0-4bba-a308-293f41133f76"
+}

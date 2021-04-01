@@ -1,0 +1,38 @@
+{
+ "properties": {
+  "displayName": "MAFR Network interfaces should not have public IPs",
+  "policyType": "Custom",
+  "mode": "Indexed",
+  "description": "This policy denies the network interfaces which are configured with any public IP. Public IP addresses allow internet resources to communicate inbound to Azure resources, and Azure resources to communicate outbound to the internet. This should be reviewed by the network security team.",
+  "metadata": {
+   "category": "Network",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-06-21T07:36:52.0200285Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Network/networkInterfaces"
+     },
+     {
+      "not": {
+       "field": "Microsoft.Network/networkInterfaces/ipconfigurations[*].publicIpAddress.id",
+       "notLike": "*"
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "audit"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/385a90ee-6d79-4ef4-bc8f-d6aed1b4c54a",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "385a90ee-6d79-4ef4-bc8f-d6aed1b4c54a"
+}

@@ -1,0 +1,108 @@
+{
+ "properties": {
+  "displayName": "MAFR Project-deny-root",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "category": "tag",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2021-02-23T12:32:39.5733257Z",
+   "updatedBy": "3d43d36c-3795-459c-9c64-4d82f0ef476f",
+   "updatedOn": "2021-03-25T06:11:44.398447Z"
+  },
+  "parameters": {
+   "tagName": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Tag Name",
+     "description": "Name of the tag, such as 'environment'"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "field": "[concat('tags[', parameters('tagName'), ']')]",
+      "notIn": [
+       "alecto",
+       "b2b",
+       "cams",
+       "clickstream",
+       "cnccleveron",
+       "networkdevices",
+       "coporatewebsites",
+       "cpr",
+       "datafeed",
+       "designsystem",
+       "dosdevelop",
+       "digitalplatform",
+       "esb",
+       "eticket",
+       "homeweb",
+       "hybrislowerenvironments",
+       "hyperstarstg",
+       "loyalty",
+       "mediator",
+       "mafseller",
+       "callcenter",
+       "centralkitchen",
+       "tibco",
+       "magistor",
+       "ciscomeraki",
+       "itsoc",
+       "dataanalytics",
+       "mytask",
+       "nervecenter",
+       "slimstock",
+       "teammate",
+       "waronwaste",
+       "cdb",
+       "stockapp",
+       "mkt",
+       "otpm",
+       "payment",
+       "product",
+       "datascience",
+       "qradar",
+       "scanandgo",
+       "search",
+       "securityapp",
+       "virtualmall",
+       "darwinproject",
+       "storedutymanager",
+       "smartforms",
+       "virtualdesktop",
+       "backupservices",
+       "backupservices",
+       "wecare",
+       "dnsservices",
+       "monitoringdashboard",
+       "networkcomponents",
+       "expressrouteservices",
+       "wadiservices",
+       "frontliners",
+       "patchmanagement",
+       "storageservices",
+       "coreservices",
+       "container-platform",
+       "rg-chatbot-un-p-01",
+       "newproject",
+       "freshfoodtools"
+      ]
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/22fc3f88-adc0-461d-b23e-59cd57023ddb",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "22fc3f88-adc0-461d-b23e-59cd57023ddb"
+}

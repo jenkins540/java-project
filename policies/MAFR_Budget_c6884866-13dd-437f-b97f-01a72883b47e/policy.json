@@ -1,0 +1,46 @@
+{
+ "properties": {
+  "displayName": "MAFR Budget",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "version": "1.0.0",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2021-02-14T16:16:58.3233775Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "tagName": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Tag Name",
+     "description": "Name of the tag, such as 'environment'"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "field": "[concat('tags[', parameters('tagName'), ']')]",
+      "notIn": [
+       "digital",
+       "it"
+      ]
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/subscriptions/9f867886-e1ea-4b2b-9891-03acde7ac807/providers/Microsoft.Authorization/policyDefinitions/c6884866-13dd-437f-b97f-01a72883b47e",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "c6884866-13dd-437f-b97f-01a72883b47e"
+}

@@ -1,0 +1,150 @@
+{
+ "properties": {
+  "displayName": "MAFR Require tag and its value on resource groups All - Root/Audit",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "Enforces a required tagging on the resource groups.",
+  "metadata": {
+   "category": "Tags",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-05-23T00:59:26.6947964Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2020-05-23T01:02:20.9857313Z"
+  },
+  "parameters": {
+   "ApplicationName": {
+    "type": "String",
+    "metadata": {
+     "displayName": "ApplicationName",
+     "description": "Exact Application Name, case sensitive"
+    }
+   },
+   "BusinessUnit": {
+    "type": "String",
+    "metadata": {
+     "displayName": "BusinessUnit",
+     "description": "Corporate, Omnichannel, Finance, HC"
+    }
+   },
+   "CostCenter": {
+    "type": "String",
+    "metadata": {
+     "displayName": "CostCenter",
+     "description": "Required for Billing, Case sensitive"
+    }
+   },
+   "Environment": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Environment",
+     "description": "one of Dev, QA, Stage, Test, Prod"
+    }
+   },
+   "Owner": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Owner",
+     "description": "email ID of the Owner"
+    }
+   },
+   "Vendor": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Vendor",
+     "description": "Application or software vendor such as Magistor"
+    }
+   },
+   "Location": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Location",
+     "description": "uaenorth, westeurope"
+    }
+   },
+   "provisioned_by": {
+    "type": "String",
+    "metadata": {
+     "displayName": "provisioned_by",
+     "description": "email id of the provisioned_by, corphocloudteam@mafcarrefour.com"
+    }
+   },
+   "Application": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Application",
+     "description": "few words of the Application such as, warehouse management for SME"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('ApplicationName'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('BusinessUnit'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('CostCenter'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Environment'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Owner'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Vendor'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Location'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Application'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('provisioned_by'), ']')]",
+       "exists": "true"
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "audit"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/e158dac1-1e6c-48f1-91b8-10a47300dab9",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "e158dac1-1e6c-48f1-91b8-10a47300dab9"
+}

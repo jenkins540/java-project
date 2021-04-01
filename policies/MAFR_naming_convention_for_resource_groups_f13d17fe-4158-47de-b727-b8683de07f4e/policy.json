@@ -1,0 +1,65 @@
+{
+ "properties": {
+  "displayName": "MAFR naming convention for resource groups",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "category": "Testing",
+   "createdBy": "3d43d36c-3795-459c-9c64-4d82f0ef476f",
+   "createdOn": "2020-03-10T10:56:07.1680266Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2020-04-13T20:05:33.0404759Z"
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), 0, 3),'Not starting with RG-')]",
+         "equals": "rg-"
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string is not 3 env char')]",
+           "match": "prd"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string is not 3 env char')]",
+           "match": "dev"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string is not 3 env char')]",
+           "match": "uat"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string is not 3 env char')]",
+           "match": "stg"
+          }
+         ]
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), sub(length(field('name')), 3), 3), 'string too short')]",
+         "match": "-##"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/RnD-DEV/providers/Microsoft.Authorization/policyDefinitions/f13d17fe-4158-47de-b727-b8683de07f4e",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "f13d17fe-4158-47de-b727-b8683de07f4e"
+}

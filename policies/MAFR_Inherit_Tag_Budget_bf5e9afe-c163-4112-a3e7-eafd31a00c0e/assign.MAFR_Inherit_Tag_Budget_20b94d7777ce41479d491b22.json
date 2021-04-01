@@ -1,0 +1,36 @@
+{
+ "sku": {
+  "name": "A0",
+  "tier": "Free"
+ },
+ "properties": {
+  "displayName": "MAFR Inherit Tag Budget",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/bf5e9afe-c163-4112-a3e7-eafd31a00c0e",
+  "scope": "/subscriptions/9f867886-e1ea-4b2b-9891-03acde7ac807",
+  "notScopes": [],
+  "parameters": {
+   "tagName": {
+    "value": "Budget"
+   }
+  },
+  "description": "",
+  "metadata": {
+   "assignedBy": "Mohamed Galal Badr",
+   "parameterScopes": {},
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2021-02-14T16:58:06.1235768Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2021-02-14T19:32:36.0295343Z"
+  },
+  "enforcementMode": "Default"
+ },
+ "identity": {
+  "principalId": "31546ea1-df30-4778-b371-0b24caf71116",
+  "tenantId": "0df535d9-521f-46ef-b318-d53cc372f469",
+  "type": "SystemAssigned"
+ },
+ "id": "/subscriptions/9f867886-e1ea-4b2b-9891-03acde7ac807/providers/Microsoft.Authorization/policyAssignments/20b94d7777ce41479d491b22",
+ "type": "Microsoft.Authorization/policyAssignments",
+ "name": "20b94d7777ce41479d491b22",
+ "location": "eastus"
+}

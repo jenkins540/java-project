@@ -1,0 +1,43 @@
+{
+ "properties": {
+  "displayName": "MAFR valid environment tags",
+  "policyType": "Custom",
+  "mode": "Indexed",
+  "metadata": {
+   "category": "Tags",
+   "createdBy": "4ecfd421-9b3b-4156-a4f9-eb79c8218dfa",
+   "createdOn": "2021-01-12T21:41:14.7593696Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2021-02-01T15:27:01.5302113Z"
+  },
+  "parameters": {
+   "allowedEnvironments": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Allowed Environments",
+     "description": "The list of allowed environments tag for resources."
+    },
+    "allowedValues": [
+     "dev",
+     "stg",
+     "test",
+     "prod"
+    ]
+   }
+  },
+  "policyRule": {
+   "if": {
+    "not": {
+     "field": "tags['Environment']",
+     "in": "[parameters('allowedEnvironments')]"
+    }
+   },
+   "then": {
+    "effect": "audit"
+   }
+  }
+ },
+ "id": "/subscriptions/9f867886-e1ea-4b2b-9891-03acde7ac807/providers/Microsoft.Authorization/policyDefinitions/eab00775-76f9-42f0-a241-3f7daf1aafe4",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "eab00775-76f9-42f0-a241-3f7daf1aafe4"
+}

@@ -1,0 +1,114 @@
+{
+ "properties": {
+  "displayName": "MAFR naming convention for resource groups2",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "rg-app-env-01",
+  "metadata": {
+   "category": "Testing",
+   "createdBy": "3d43d36c-3795-459c-9c64-4d82f0ef476f",
+   "createdOn": "2020-05-03T17:14:56.4840175Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2020-07-14T22:22:21.9835666Z"
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), 0, 3),'Not starting with RG-')]",
+         "equals": "rg-"
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), sub(length(field('name')), 3), 4), '4 chars app project')]",
+           "match": "????"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), sub(length(field('name')), 3), 5), '5 chars app project')]",
+           "match": "?????"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), sub(length(field('name')), 3), 6), '6 chars app project')]",
+           "match": "??????"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), sub(length(field('name')), 3), 7), '7 chars app project')]",
+           "match": "???????"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), sub(length(field('name')), 3), 8), '8 chars app project')]",
+           "match": "???????"
+          }
+         ]
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 chars for region')]",
+           "match": "un"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 chars for region')]",
+           "match": "us"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 chars for region')]",
+           "match": "we"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 chars for region')]",
+           "match": "ci"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 chars for region')]",
+           "match": "wi"
+          }
+         ]
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'p,d,u,s,t')]",
+           "match": "p"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'p,d,u,s,t')]",
+           "match": "d"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'p,d,u,s,t')]",
+           "match": "u"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'p,d,u,s,t')]",
+           "match": "s"
+          }
+         ]
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), sub(length(field('name')), 3), 3), 'string too short')]",
+         "match": "-##"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/MAFR-RnD/providers/Microsoft.Authorization/policyDefinitions/9801efd4-2196-4707-9d5e-e4065f4cd89d",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "9801efd4-2196-4707-9d5e-e4065f4cd89d"
+}

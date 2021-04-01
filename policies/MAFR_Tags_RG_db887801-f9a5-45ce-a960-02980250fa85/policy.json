@@ -1,0 +1,54 @@
+{
+ "properties": {
+  "displayName": "MAFR Tags RG",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "version": "1.0.0",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2021-02-14T16:34:49.242168Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "tagName1": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Project",
+     "description": "Name of the tag, such as 'project'"
+    }
+   },
+   "tagName2": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Budget",
+     "description": "Name of the tag, such as 'Budget'"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "field": "[concat('tags[', parameters('tagName1'), ']')]",
+      "exists": "false"
+     },
+     {
+      "field": "[concat('tags[', parameters('tagName2'), ']')]",
+      "exists": "false"
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/subscriptions/9f867886-e1ea-4b2b-9891-03acde7ac807/providers/Microsoft.Authorization/policyDefinitions/db887801-f9a5-45ce-a960-02980250fa85",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "db887801-f9a5-45ce-a960-02980250fa85"
+}

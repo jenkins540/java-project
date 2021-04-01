@@ -1,0 +1,55 @@
+{
+ "properties": {
+  "displayName": "MAFR Inherit Tag Project root",
+  "policyType": "Custom",
+  "mode": "Indexed",
+  "metadata": {
+   "category": "tag",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2021-02-23T12:40:28.5540196Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "tagName": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Tag Name",
+     "description": "Name of the tag, such as 'environment'"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "[concat('tags[', parameters('tagName'), ']')]",
+      "exists": "false"
+     },
+     {
+      "value": "[resourceGroup().tags[parameters('tagName')]]",
+      "notEquals": ""
+     }
+    ]
+   },
+   "then": {
+    "effect": "modify",
+    "details": {
+     "roleDefinitionIds": [
+      "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+     ],
+     "operations": [
+      {
+       "operation": "add",
+       "field": "[concat('tags[', parameters('tagName'), ']')]",
+       "value": "[resourceGroup().tags[parameters('tagName')]]"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/e0c3dac2-c024-42c7-a4ea-6f8a4a62406e",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "e0c3dac2-c024-42c7-a4ea-6f8a4a62406e"
+}

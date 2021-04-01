@@ -1,0 +1,202 @@
+{
+ "properties": {
+  "displayName": "MAFR Require tag and its value on resource groups All - Root/Deny",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "Enforces a required tagging on the resource groups.",
+  "metadata": {
+   "category": "Tags",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-12-07T18:58:20.5998719Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2020-12-14T08:26:40.6430509Z"
+  },
+  "parameters": {
+   "ApplicationName": {
+    "type": "String",
+    "metadata": {
+     "displayName": "ApplicationName",
+     "description": "case sensitive"
+    }
+   },
+   "Department": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Department",
+     "description": "case sensitive"
+    }
+   },
+   "Approver": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Approver",
+     "description": "case sensitive"
+    }
+   },
+   "BusinessUnit": {
+    "type": "String",
+    "metadata": {
+     "displayName": "BusinessUnit",
+     "description": "Corporate, Omnichannel, Finance, HC"
+    }
+   },
+   "CostCenter": {
+    "type": "String",
+    "metadata": {
+     "displayName": "CostCenter",
+     "description": "Required for Billing, Case sensitive"
+    }
+   },
+   "Environment": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Environment",
+     "description": "one of Dev, QA, Stage, Test, Prod"
+    }
+   },
+   "BusinessContact": {
+    "type": "String",
+    "metadata": {
+     "displayName": "BusinessContact",
+     "description": "email ID of the BusinessContact - Case sensitive"
+    }
+   },
+   "TechnicalContact": {
+    "type": "String",
+    "metadata": {
+     "displayName": "TechnicalContact",
+     "description": "email ID of the TechnicalContact - Case sensitive"
+    }
+   },
+   "Vendor": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Vendor",
+     "description": "Application or software vendor such as Magistor"
+    }
+   },
+   "Requester": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Requester",
+     "description": "Requester email ID - Case sensitive"
+    }
+   },
+   "provisioned_by": {
+    "type": "String",
+    "metadata": {
+     "displayName": "provisioned_by",
+     "description": "email id of the provisioned_by, corphocloudteam@mafcarrefour.com"
+    }
+   },
+   "ProvisionDate": {
+    "type": "String",
+    "metadata": {
+     "displayName": "ProvisionDate",
+     "description": "ProvisionDate in a format DD-MON-YYYYY"
+    }
+   },
+   "Project": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Project",
+     "description": "Project name - Case Sensitive"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "anyOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('ApplicationName'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Department'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Approver'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('BusinessUnit'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('CostCenter'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Environment'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('BusinessContact'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('TechnicalContact'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Vendor'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Requester'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('Project'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('provisioned_by'), ']')]",
+       "exists": "true"
+      }
+     },
+     {
+      "not": {
+       "field": "[concat('tags[',parameters('ProvisionDate'), ']')]",
+       "exists": "true"
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/ad31878e-1d57-4505-aa93-23873f8f0531",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "ad31878e-1d57-4505-aa93-23873f8f0531"
+}

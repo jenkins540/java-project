@@ -1,0 +1,84 @@
+{
+ "properties": {
+  "displayName": "MAFR naming convention for resource groups main",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "category": "Root",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-11-03T08:54:17.7381129Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 8), split(field('name'),'-')[2], 'string is not in location list')]",
+         "in": [
+          "un",
+          "uc",
+          "wi",
+          "ci",
+          "we"
+         ]
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 9), split(field('name'),'-')[3], 'string is not in env list')]",
+         "in": [
+          "p",
+          "s",
+          "t",
+          "d"
+         ]
+        },
+        {
+         "anyOf": [
+          {
+           "field": "name",
+           "match": "rg-....-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-.....-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-......-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-.......-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-........-..-.-##"
+          },
+          {
+           "field": "name",
+           "match": "rg-.........-..-.-##"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/f3e7cbf8-abc9-4239-b818-b9ea8e6aab0c",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "f3e7cbf8-abc9-4239-b818-b9ea8e6aab0c"
+}

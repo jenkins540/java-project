@@ -1,0 +1,57 @@
+{
+ "properties": {
+  "displayName": "MAFR Required Tags on Resource Groups - Project Budget",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2021-02-08T16:09:56.6521086Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "Project": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Project",
+     "description": "Project'"
+    }
+   },
+   "Budget": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Budget",
+     "description": "Budget'"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "anyOf": [
+       {
+        "field": "[concat('tags[', parameters('Project'), ']')]",
+        "exists": "false"
+       },
+       {
+        "field": "[concat('tags[', parameters('Budget'), ']')]",
+        "exists": "false"
+       }
+      ]
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/3fb36e57-cff1-43bd-b305-b762da3df3a5",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "3fb36e57-cff1-43bd-b305-b762da3df3a5"
+}

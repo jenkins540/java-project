@@ -1,0 +1,98 @@
+{
+ "properties": {
+  "displayName": "MAFR naming convention for subnets",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "vnet-dev-westeurope-001",
+  "metadata": {
+   "category": "Testing",
+   "createdBy": "3d43d36c-3795-459c-9c64-4d82f0ef476f",
+   "createdOn": "2020-03-23T07:41:46.7736642Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Network/virtualNetworks/subnets"
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), 0, 5),'Not starting with vnet-')]",
+         "equals": "snet-"
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[1], 'string is not 3 env char')]",
+           "match": "prd"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[1], 'string is not 3 env char')]",
+           "match": "dev"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[1], 'string is not 3 env char')]",
+           "match": "uat"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[1], 'string is not 3 env char')]",
+           "match": "stg"
+          }
+         ]
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string is not 3 env char')]",
+           "match": "westeurope"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string is not 3 env char')]",
+           "match": "northeurope"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string is not 3 env char')]",
+           "match": "centralindia"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string is not 3 env char')]",
+           "match": "uksouth"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], 'string is not 3 env char')]",
+           "match": "uaenorth"
+          }
+         ]
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'string is not 3 env char')]",
+           "match": "fe"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'string is not 3 env char')]",
+           "match": "be"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/MAFR-RnD/providers/Microsoft.Authorization/policyDefinitions/fc13e680-9102-4962-b1e1-8e2612b8148e",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "fc13e680-9102-4962-b1e1-8e2612b8148e"
+}

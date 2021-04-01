@@ -1,0 +1,59 @@
+{
+ "properties": {
+  "displayName": "MAFR Virtual machines should be connected to an approved virtual network - test",
+  "policyType": "Custom",
+  "mode": "Indexed",
+  "description": "This policy audits any virtual machine connected to a virtual network that is not approved.",
+  "metadata": {
+   "category": "Network",
+   "createdBy": "3d43d36c-3795-459c-9c64-4d82f0ef476f",
+   "createdOn": "2020-03-23T07:31:49.9826047Z",
+   "updatedBy": "3d43d36c-3795-459c-9c64-4d82f0ef476f",
+   "updatedOn": "2020-04-09T13:13:49.4420323Z"
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effect",
+     "description": "The effect determines what happens when the policy rule is evaluated to match"
+    },
+    "allowedValues": [
+     "Audit",
+     "Deny",
+     "Disabled"
+    ],
+    "defaultValue": "Audit"
+   },
+   "virtualNetworkId": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Virtual network Id",
+     "description": "Resource Id of the virtual network. Example: /subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.Network/virtualNetworks/Name"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Network/networkInterfaces"
+     },
+     {
+      "not": {
+       "field": "Microsoft.Network/networkInterfaces/ipconfigurations[*].subnet.id",
+       "like": "[concat(parameters('virtualNetworkId'),'/*')]"
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "[parameters('effect')]"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/MAFR-RnD/providers/Microsoft.Authorization/policyDefinitions/fa13f047-94d6-45d2-a56a-92d6da7bacb5",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "fa13f047-94d6-45d2-a56a-92d6da7bacb5"
+}

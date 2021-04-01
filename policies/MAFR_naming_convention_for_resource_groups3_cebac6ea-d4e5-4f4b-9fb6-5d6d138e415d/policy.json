@@ -1,0 +1,114 @@
+{
+ "properties": {
+  "displayName": "MAFR naming convention for resource groups3",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "rg-app-env-01",
+  "metadata": {
+   "category": "Testing",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-07-14T21:52:25.7007563Z",
+   "updatedBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "updatedOn": "2020-07-18T18:06:10.0343056Z"
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+     },
+     {
+      "not": {
+       "allOf": [
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), 0, 3),'Not starting with RG-')]",
+         "equals": "rg-"
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 4), split(field('name'),'-')[1], '4 chars app project')]",
+           "match": "????"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 5), split(field('name'),'-')[1], '5 chars app project')]",
+           "match": "?????"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 6), split(field('name'),'-')[1], '6 chars app project')]",
+           "match": "??????"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 7), split(field('name'),'-')[1], '7 chars app project')]",
+           "match": "???????"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 8), split(field('name'),'-')[1], '8 chars app project')]",
+           "match": "???????"
+          }
+         ]
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 uae-north')]",
+           "match": "un"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 chars uae-south')]",
+           "match": "us"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 chars west-europe')]",
+           "match": "we"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 chars central-india')]",
+           "match": "ci"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[2], '2 chars west-india')]",
+           "match": "wi"
+          }
+         ]
+        },
+        {
+         "anyOf": [
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'p,d,u,s,t')]",
+           "match": "p"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'p,d,u,s,t')]",
+           "match": "d"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'p,d,u,s,t')]",
+           "match": "u"
+          },
+          {
+           "value": "[if(greaterOrEquals(length(field('name')), 3), split(field('name'),'-')[3], 'p,d,u,s,t')]",
+           "match": "s"
+          }
+         ]
+        },
+        {
+         "value": "[if(greaterOrEquals(length(field('name')), 3), substring(field('name'), sub(length(field('name')), 3), 3), 'string too short')]",
+         "match": "-##"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/MAFR-RnD/providers/Microsoft.Authorization/policyDefinitions/cebac6ea-d4e5-4f4b-9fb6-5d6d138e415d",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "cebac6ea-d4e5-4f4b-9fb6-5d6d138e415d"
+}

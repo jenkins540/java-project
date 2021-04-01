@@ -1,0 +1,38 @@
+{
+ "properties": {
+  "displayName": "MAFR PolicyTagCreatedOnDate",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "Creates CreatedOnDate tag for each and every new reesource in azure.",
+  "metadata": {
+   "category": "Tags",
+   "createdBy": "d0a5197e-7a46-4fb9-a6f4-0b51a6c9526d",
+   "createdOn": "2020-12-25T09:58:22.0340712Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "tags['CreatedOnDate']",
+      "exists": "false"
+     }
+    ]
+   },
+   "then": {
+    "effect": "append",
+    "details": [
+     {
+      "field": "tags['CreatedOnDate']",
+      "value": "[utcNow()]"
+     }
+    ]
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/0df535d9-521f-46ef-b318-d53cc372f469/providers/Microsoft.Authorization/policyDefinitions/5418d5ba-bcd2-4fe9-80c2-4d0d4545e188",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "5418d5ba-bcd2-4fe9-80c2-4d0d4545e188"
+}

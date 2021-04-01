@@ -1,0 +1,102 @@
+name: manage-azure-policy-24741532
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Updating Azure Policies'
+
+
+## Uncomment the following if you wish to automatically trigger workflow run with every commit
+#
+#  push:
+#    paths:
+#      - 'policies/MAFR_Web_Application_should_only_be_accessible_over_HTTPS_05d85937-1537-400e-aaf0-17418c6eeb77/**'
+#      - 'policies/MAFR_Budget_deny_root_1779f8bd-3d9b-420e-98ef-c78b99c08791/**'
+#      - 'policies/MAFR_Project-deny-root_22fc3f88-adc0-461d-b23e-59cd57023ddb/**'
+#      - 'policies/MAFR_Required_Tags_on_Resource_Groups_-_Project_Budget_01_2ac4db7d-3285-4095-bdba-3ae5c04128b8/**'
+#      - 'policies/MAFR_Network_interfaces_should_not_have_public_IPs_385a90ee-6d79-4ef4-bc8f-d6aed1b4c54a/**'
+#      - 'policies/MAFR_Required_Tags_on_Resource_Groups_-_Project_Budget_3fb36e57-cff1-43bd-b305-b762da3df3a5/**'
+#      - 'policies/MAFR_PolicyTagCreatedOnDate_5418d5ba-bcd2-4fe9-80c2-4d0d4545e188/**'
+#      - 'policies/MAFR-enforce-hybrid-use-benefit_78dbf153-7f0a-4d72-a220-11f4d29543f9/**'
+#      - 'policies/MAFR_Allowed_locations_79d8f7e3-376c-4bac-9469-3f61b8f4f376/**'
+#      - 'policies/MAFR_valid_Project_tags_7f021f0c-e6cf-4abc-804f-cc9839a557be/**'
+#      - 'policies/MAFR_Audit_Unattached_Disks_8d97f626-b9ff-47ea-bb76-14a9b2e253c7/**'
+#      - 'policies/MAFR_Inherit_Tag_Budget_Root_8fdf6861-b40a-45e9-a549-15f8c1937da6/**'
+#      - 'policies/MAFR_Require_tag_and_its_value_on_resource_groups_-_Root/Audit_9abeb8e8-fd9e-402c-a7fb-a28b5f9f4beb/**'
+#      - 'policies/MAFR_Enforce_SSL_connection_should_be_enabled_for_MySQL_database_servers_9e421b44-4174-4a68-ab59-5c660ee0431a/**'
+#      - 'policies/MAFR_Require_tag_and_its_value_on_resource_groups_All_-_Root/Deny_ad31878e-1d57-4505-aa93-23873f8f0531/**'
+#      - 'policies/MAFR_Inherit_Tag_Budget_bf5e9afe-c163-4112-a3e7-eafd31a00c0e/**'
+#      - 'policies/MAFR_Inherit_Tag_Project_de0d22ab-f888-4c7e-9382-691411f5c00b/**'
+#      - 'policies/MAFR_Inherit_Tag_Project_root_e0c3dac2-c024-42c7-a4ea-6f8a4a62406e/**'
+#      - 'policies/MAFR_Require_tag_and_its_value_on_resource_groups_All_-_Root/Audit_e158dac1-1e6c-48f1-91b8-10a47300dab9/**'
+#      - 'policies/MAFR_Require_a_tag_and_its_value_on_resource_groups_Deny-v01_eb51981d-163c-4e1a-9778-de0c0ce141d3/**'
+#      - 'policies/MAFR_naming_convention_for_resource_groups_main_f3e7cbf8-abc9-4239-b818-b9ea8e6aab0c/**'
+#      - 'policies/MAFR_naming_convention_for_virtual_networks_2c1a6579-eeb7-4263-ac7d-1c46087c0328/**'
+#      - 'policies/MAFR_naming_convention_for_resource_groups2_9801efd4-2196-4707-9d5e-e4065f4cd89d/**'
+#      - 'policies/MAFR_naming_convention_for_storage_account_4372b817-78b0-4bba-a308-293f41133f76/**'
+#      - 'policies/MAFR_valid_environment_tags_eab00775-76f9-42f0-a241-3f7daf1aafe4/**'
+#      - 'policies/MAFR_Tags_RG_db887801-f9a5-45ce-a960-02980250fa85/**'
+#      - 'policies/MAFR_Budget_c6884866-13dd-437f-b97f-01a72883b47e/**'
+#      - 'policies/MAFR_naming_convention_for_VMs_760423c3-c69b-41b9-9b72-96037573f42f/**'
+#      - 'policies/MAFR_Project_0ced9348-d369-4ede-bc13-cfa9ffa18a5a/**'
+#      - 'policies/MAFR_Allowed_virtual_machine_SKUs_5893aaf4-6fe9-4b7e-aea3-0e8c6615f943/**'
+#      - 'policies/MAFR_naming_convention_for_resource_groups_f13d17fe-4158-47de-b727-b8683de07f4e/**'
+#      - 'policies/MAFR_naming_convention_for_resource_groups4_2735640f-b2cf-4935-a49b-c0333a6db921/**'
+#      - 'policies/MAFR_Virtual_machines_should_be_connected_to_an_approved_virtual_network_-_test_fa13f047-94d6-45d2-a56a-92d6da7bacb5/**'
+#      - 'policies/MAFR_naming_convention_for_subnets_fc13e680-9102-4962-b1e1-8e2612b8148e/**'
+#      - 'policies/MAFR_naming_convention_for_virtual_networks_&_subnets_d52c74a5-52de-4616-b04c-72519bfa5255/**'
+#      - 'policies/MAFR_naming_convention_for_resource_groups3_cebac6ea-d4e5-4f4b-9fb6-5d6d138e415d/**'
+#      - .github/workflows/manage-azure-policy-24741532.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_24741532}}
+        allow-no-subscriptions: true
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          policies/MAFR_Web_Application_should_only_be_accessible_over_HTTPS_05d85937-1537-400e-aaf0-17418c6eeb77/**
+          policies/MAFR_Budget_deny_root_1779f8bd-3d9b-420e-98ef-c78b99c08791/**
+          policies/MAFR_Project-deny-root_22fc3f88-adc0-461d-b23e-59cd57023ddb/**
+          policies/MAFR_Required_Tags_on_Resource_Groups_-_Project_Budget_01_2ac4db7d-3285-4095-bdba-3ae5c04128b8/**
+          policies/MAFR_Network_interfaces_should_not_have_public_IPs_385a90ee-6d79-4ef4-bc8f-d6aed1b4c54a/**
+          policies/MAFR_Required_Tags_on_Resource_Groups_-_Project_Budget_3fb36e57-cff1-43bd-b305-b762da3df3a5/**
+          policies/MAFR_PolicyTagCreatedOnDate_5418d5ba-bcd2-4fe9-80c2-4d0d4545e188/**
+          policies/MAFR-enforce-hybrid-use-benefit_78dbf153-7f0a-4d72-a220-11f4d29543f9/**
+          policies/MAFR_Allowed_locations_79d8f7e3-376c-4bac-9469-3f61b8f4f376/**
+          policies/MAFR_valid_Project_tags_7f021f0c-e6cf-4abc-804f-cc9839a557be/**
+          policies/MAFR_Audit_Unattached_Disks_8d97f626-b9ff-47ea-bb76-14a9b2e253c7/**
+          policies/MAFR_Inherit_Tag_Budget_Root_8fdf6861-b40a-45e9-a549-15f8c1937da6/**
+          policies/MAFR_Require_tag_and_its_value_on_resource_groups_-_Root/Audit_9abeb8e8-fd9e-402c-a7fb-a28b5f9f4beb/**
+          policies/MAFR_Enforce_SSL_connection_should_be_enabled_for_MySQL_database_servers_9e421b44-4174-4a68-ab59-5c660ee0431a/**
+          policies/MAFR_Require_tag_and_its_value_on_resource_groups_All_-_Root/Deny_ad31878e-1d57-4505-aa93-23873f8f0531/**
+          policies/MAFR_Inherit_Tag_Budget_bf5e9afe-c163-4112-a3e7-eafd31a00c0e/**
+          policies/MAFR_Inherit_Tag_Project_de0d22ab-f888-4c7e-9382-691411f5c00b/**
+          policies/MAFR_Inherit_Tag_Project_root_e0c3dac2-c024-42c7-a4ea-6f8a4a62406e/**
+          policies/MAFR_Require_tag_and_its_value_on_resource_groups_All_-_Root/Audit_e158dac1-1e6c-48f1-91b8-10a47300dab9/**
+          policies/MAFR_Require_a_tag_and_its_value_on_resource_groups_Deny-v01_eb51981d-163c-4e1a-9778-de0c0ce141d3/**
+          policies/MAFR_naming_convention_for_resource_groups_main_f3e7cbf8-abc9-4239-b818-b9ea8e6aab0c/**
+          policies/MAFR_naming_convention_for_virtual_networks_2c1a6579-eeb7-4263-ac7d-1c46087c0328/**
+          policies/MAFR_naming_convention_for_resource_groups2_9801efd4-2196-4707-9d5e-e4065f4cd89d/**
+          policies/MAFR_naming_convention_for_storage_account_4372b817-78b0-4bba-a308-293f41133f76/**
+          policies/MAFR_valid_environment_tags_eab00775-76f9-42f0-a241-3f7daf1aafe4/**
+          policies/MAFR_Tags_RG_db887801-f9a5-45ce-a960-02980250fa85/**
+          policies/MAFR_Budget_c6884866-13dd-437f-b97f-01a72883b47e/**
+          policies/MAFR_naming_convention_for_VMs_760423c3-c69b-41b9-9b72-96037573f42f/**
+          policies/MAFR_Project_0ced9348-d369-4ede-bc13-cfa9ffa18a5a/**
+          policies/MAFR_Allowed_virtual_machine_SKUs_5893aaf4-6fe9-4b7e-aea3-0e8c6615f943/**
+          policies/MAFR_naming_convention_for_resource_groups_f13d17fe-4158-47de-b727-b8683de07f4e/**
+          policies/MAFR_naming_convention_for_resource_groups4_2735640f-b2cf-4935-a49b-c0333a6db921/**
+          policies/MAFR_Virtual_machines_should_be_connected_to_an_approved_virtual_network_-_test_fa13f047-94d6-45d2-a56a-92d6da7bacb5/**
+          policies/MAFR_naming_convention_for_subnets_fc13e680-9102-4962-b1e1-8e2612b8148e/**
+          policies/MAFR_naming_convention_for_virtual_networks_&_subnets_d52c74a5-52de-4616-b04c-72519bfa5255/**
+          policies/MAFR_naming_convention_for_resource_groups3_cebac6ea-d4e5-4f4b-9fb6-5d6d138e415d/**
